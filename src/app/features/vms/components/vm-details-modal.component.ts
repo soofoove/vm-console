@@ -48,12 +48,12 @@ export class VmDetailsModalComponent implements OnInit, OnDestroy {
   ttlLeft(vm: Vm) {
     const ttl = computeTtl(vm);
     if (ttl.expired) {
-      return 'истёк';
+      return 'expired';
     }
     if (ttl.leftHours < 1) {
-      return `~ ${Math.max(1, Math.round(ttl.leftHours * 60))}м`;
+      return `~ ${Math.max(1, Math.round(ttl.leftHours * 60))}m`;
     }
-    return `~ ${Math.round(ttl.leftHours)}ч`;
+    return `~ ${Math.round(ttl.leftHours)}h`;
   }
 
   extend(vm: Vm) {
@@ -66,7 +66,7 @@ export class VmDetailsModalComponent implements OnInit, OnDestroy {
 
   refresh(vm: Vm) {
     this.ttlLeft(vm);
-    this.store.showToast('Обновлено', 'info');
+    this.store.showToast('Refreshed', 'info');
   }
 
   start(vm: Vm) {

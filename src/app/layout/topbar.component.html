@@ -9,14 +9,14 @@
       <input
         class="form-control input-ios"
         style="min-width: 260px;"
-        placeholder="Поиск по имени / IP / тегу…"
+        placeholder="Search by name / IP / tag…"
         [(ngModel)]="search"
         (input)="onSearchChange()"
         (focus)="onSearchFocus()"
       />
 
       <div class="segmented" id="segmentedScope">
-        <button class="btn" type="button" [class.active]="scope === 'all'" (click)="setScope('all')">Все</button>
+        <button class="btn" type="button" [class.active]="scope === 'all'" (click)="setScope('all')">All</button>
         <button class="btn" type="button" [class.active]="scope === 'active'" (click)="setScope('active')">Active</button>
         <button class="btn" type="button" [class.active]="scope === 'expiring'" (click)="setScope('expiring')">Expiring</button>
       </div>
@@ -27,7 +27,7 @@
         data-bs-toggle="offcanvas"
         data-bs-target="#offcanvasNotifications"
       >
-        Уведомления
+        Notifications
         <span
           class="position-absolute top-0 start-100 translate-middle badge rounded-pill"
           style="background: var(--red);"
@@ -36,7 +36,7 @@
         </span>
       </button>
 
-      <div class="segmented" id="segmentedTheme" title="Тема">
+      <div class="segmented" id="segmentedTheme" title="Theme">
         <button class="btn" type="button" [class.active]="theme === 'light'" (click)="setTheme('light')">Light</button>
         <button class="btn" type="button" [class.active]="theme === 'dark'" (click)="setTheme('dark')">Dark</button>
       </div>
@@ -51,8 +51,12 @@
           Mykhailo
         </button>
         <ul class="dropdown-menu dropdown-menu-end">
-          <li><button class="dropdown-item" type="button" (click)="mockLogin()">Сменить пользователя (mock)</button></li>
-          <li><button class="dropdown-item" type="button" (click)="exportEvents()">Экспорт событий (mock)</button></li>
+          <li>
+            <button class="dropdown-item" type="button" (click)="mockLogin()">Switch user (mock)</button>
+          </li>
+          <li>
+            <button class="dropdown-item" type="button" (click)="exportEvents()">Export events (mock)</button>
+          </li>
         </ul>
       </div>
     </div>

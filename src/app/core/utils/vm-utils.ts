@@ -22,16 +22,16 @@ export const computeTtl = (vm: Vm) => {
 export const ttlLabel = (vm: Vm) => {
   const { leftHours, expired } = computeTtl(vm);
   if (expired) {
-    return { label: 'истёк', kind: 'danger' } as const;
+    return { label: 'expired', kind: 'danger' } as const;
   }
   if (leftHours < 1) {
-    return { label: `~ ${Math.max(1, Math.round(leftHours * 60))}м`, kind: 'danger' } as const;
+    return { label: `~ ${Math.max(1, Math.round(leftHours * 60))}m`, kind: 'danger' } as const;
   }
   if (leftHours <= 24) {
-    return { label: `~ ${Math.round(leftHours)}ч`, kind: 'warn' } as const;
+    return { label: `~ ${Math.round(leftHours)}h`, kind: 'warn' } as const;
   }
   const days = leftHours / 24;
-  return { label: `~ ${days >= 2 ? Math.round(days) : days.toFixed(1)}д`, kind: 'default' } as const;
+  return { label: `~ ${days >= 2 ? Math.round(days) : days.toFixed(1)}d`, kind: 'default' } as const;
 };
 
 export const statusMeta = (status: VmStatus) => {

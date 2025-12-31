@@ -5,7 +5,7 @@ import { ToastService } from './toast.service';
 export class ClipboardService {
   constructor(private readonly toastService: ToastService) {}
 
-  async copy(text: string, okMessage = 'Скопировано') {
+  async copy(text: string, okMessage = 'Copied') {
     try {
       await navigator.clipboard.writeText(text);
       this.toastService.show(okMessage, 'ok');
