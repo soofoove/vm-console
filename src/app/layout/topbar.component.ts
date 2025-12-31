@@ -17,8 +17,8 @@ import { BootstrapService } from '../core/services/bootstrap.service';
 export class TopbarComponent implements OnInit, OnDestroy {
   @ViewChild('userDropdownToggle', { static: true }) userDropdownToggle?: ElementRef<HTMLButtonElement>;
 
-  pageTitle = 'Дашборд';
-  pageSubtitle = 'Запуск/остановка, TTL, квоты, заявки на новые ВМ.';
+  pageTitle = 'Dashboard';
+  pageSubtitle = 'Start/stop, TTL, quotas, requests for new VMs.';
   search = '';
   scope: 'all' | 'active' | 'expiring' = 'all';
   theme: ThemeMode = 'light';
@@ -79,7 +79,7 @@ export class TopbarComponent implements OnInit, OnDestroy {
 
   mockLogin() {
     this.store.addEvent('Mock: user switched', '', '');
-    this.store.showToast('Mock: переключили пользователя', 'info');
+    this.store.showToast('Mock: user switched', 'info');
   }
 
   exportEvents() {
@@ -88,11 +88,11 @@ export class TopbarComponent implements OnInit, OnDestroy {
 
   private updateTitle(url: string) {
     const titleMap: Record<string, [string, string]> = {
-      '/dashboard': ['Дашборд', 'Сводка: KPI и уведомления.'],
-      '/vms': ['Мои ВМ', 'Список, фильтры, TTL и быстрые операции.'],
-      '/request': ['Запросить новую', 'Форма создания ВМ (mock)'],
-      '/events': ['События / Логи', 'Журнал действий, которые ты кликаешь.'],
-      '/settings': ['Настройки', 'Переключатели и квоты (mock).']
+      '/dashboard': ['Dashboard', 'Summary: KPIs and notifications.'],
+      '/vms': ['My VMs', 'List, filters, TTL, and quick actions.'],
+      '/request': ['Request new', 'VM creation form (mock)'],
+      '/events': ['Events / Logs', 'Activity log for your clicks.'],
+      '/settings': ['Settings', 'Toggles and quotas (mock).']
     };
     const matched = Object.entries(titleMap).find(([route]) => url.startsWith(route));
     if (matched) {

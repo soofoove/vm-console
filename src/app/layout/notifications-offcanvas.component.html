@@ -5,13 +5,13 @@
   aria-labelledby="offcanvasNotificationsLabel"
 >
   <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasNotificationsLabel">Уведомления</h5>
+    <h5 class="offcanvas-title" id="offcanvasNotificationsLabel">Notifications</h5>
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
   </div>
   <div class="offcanvas-body">
     <div class="d-flex gap-2 mb-2">
-      <button class="btn btn-ios" type="button" (click)="markAllRead()">Отметить прочитанным</button>
-      <button class="btn btn-ios" type="button" (click)="clearNotifications()">Очистить</button>
+      <button class="btn btn-ios" type="button" (click)="markAllRead()">Mark all as read</button>
+      <button class="btn btn-ios" type="button" (click)="clearNotifications()">Clear</button>
     </div>
 
     <div class="d-grid gap-2" *ngIf="(notifications$ | async) as notices">
@@ -34,7 +34,7 @@
                     href="#"
                     class="text-decoration-none"
                     (click)="$event.preventDefault(); openVm(notice.vmId)"
-                    >Открыть VM</a
+                    >Open VM</a
                   >
                 </ng-container>
               </div>
@@ -51,7 +51,7 @@
         </div>
       </ng-container>
       <ng-template #empty>
-        <div class="text-muted-2 small mt-2">Нет уведомлений.</div>
+        <div class="text-muted-2 small mt-2">No notifications.</div>
       </ng-template>
     </div>
   </div>

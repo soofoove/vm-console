@@ -117,7 +117,7 @@ export class VmStoreService {
     this.seedVms(8);
     this.addNotification({
       kind: 'info',
-      text: 'Добро пожаловать! Быстрые операции теперь в списке ВМ 🙂',
+      text: 'Welcome! Quick actions are now in the VM list 🙂',
       vmId: null
     });
     this.refreshAutoNotices();
@@ -202,7 +202,7 @@ export class VmStoreService {
 
   clearEvents() {
     this.patchState({ events: [] });
-    this.toast('События очищены', 'warn');
+    this.toast('Events cleared', 'warn');
   }
 
   addNotification({ kind, text, vmId }: Pick<Notification, 'kind' | 'text' | 'vmId'>) {
@@ -227,18 +227,18 @@ export class VmStoreService {
   markAllNotificationsRead() {
     const next = this.stateSnapshot.notifications.map((notice) => ({ ...notice, read: true }));
     this.patchState({ notifications: next });
-    this.toast('Все прочитано', 'ok');
+    this.toast('All read', 'ok');
   }
 
   clearNotifications() {
     this.patchState({ notifications: [] });
-    this.toast('Уведомления удалены', 'warn');
+    this.toast('Notifications deleted', 'warn');
   }
 
   markNoticesRead() {
     const next = this.stateSnapshot.notifications.map((notice) => ({ ...notice, read: true }));
     this.patchState({ notifications: next });
-    this.toast('Уведомления очищены', 'ok');
+    this.toast('Notifications cleared', 'ok');
   }
 
   seedVms(count: number) {
@@ -280,18 +280,18 @@ export class VmStoreService {
     this.patchState({ vms: [...this.stateSnapshot.vms, ...newVms] });
     this.pruneSelection();
     this.addEvent('Seed VMs', '', '');
-    this.toast(`Добавлено ${count} VM (mock)`, 'ok');
+    this.toast(`Added ${count} VMs (mock)`, 'ok');
     this.refreshAutoNotices();
   }
 
   exportVms() {
     this.addEvent('Export VMs (mock)', '', '');
-    this.toast('Экспорт VMs (mock)', 'info');
+    this.toast('Export VMs (mock)', 'info');
   }
 
   exportEvents() {
     this.addEvent('Export Events (mock)', '', '');
-    this.toast('Экспорт событий (mock)', 'info');
+    this.toast('Export events (mock)', 'info');
   }
 
   showToast(message: string, kind: 'info' | 'ok' | 'warn' | 'danger' = 'info') {
@@ -301,7 +301,7 @@ export class VmStoreService {
   async runAction(action: 'extend' | 'restart' | 'stop' | 'start' | 'delete' | 'copyssh', ids: string[]) {
     const vms = ids.map((id) => this.stateSnapshot.vms.find((vm) => vm.id === id)).filter(Boolean) as Vm[];
     if (vms.length === 0) {
-      this.toast('Сначала выбери хотя бы одну ВМ', 'warn');
+      this.toast('Select at least one VM first', 'warn');
       return;
     }
 
@@ -332,7 +332,7 @@ export class VmStoreService {
           this.addEvent('Delete VM (requested)', vm.name, 'Deleting');
         }
         if (action === 'copyssh') {
-          this.clipboardService.copy(sshCommand(vm), `SSH скопирован для ${vm.name}`);
+          this.clipboardService.copy(sshCommand(vm), `SSH copied for ${vm.name}`);
         }
       });
       this.patchState({ vms: updated });
@@ -340,8 +340,8 @@ export class VmStoreService {
 
     if (action === 'delete') {
       const confirmed = await this.confirmService.confirm(
-        'Удалить ВМ?',
-        `Удалить: ${vms.map((vm) => vm.name).join(', ')} (mock)`
+        'Delete VM?',
+        `Delete: ${vms.map((vm) => vm.name).join(', ')} (mock)`
       );
       if (!confirmed) {
         return;
@@ -355,7 +355,7 @@ export class VmStoreService {
           selectedIds: new Set([...this.stateSnapshot.selectedIds].filter((id) => !idsSet.has(id)))
         });
         this.addEvent('VM deleted (mock)', vms[0].name, '');
-        this.toast('ВМ удалены (mock)', 'danger');
+        this.toast('VMs deleted (mock)', 'danger');
         this.refreshAutoNotices();
       }, 1200);
       return;
@@ -381,8 +381,8 @@ export class VmStoreService {
     }
 
     applyAction();
-    if (action === 'extend') this.toast('TTL продлён (+24ч)', 'ok');
-    if (action === 'stop') this.toast('Остановлено', 'warn');
+    if (action === 'extend') this.toast('TTL extended (+24h)', 'ok');
+    if (action === 'stop') this.toast('Stopped', 'warn');
     if (action === 'restart') this.toast('Restart (mock)', 'info');
     this.refreshAutoNotices();
   }
@@ -393,7 +393,7 @@ export class VmStoreService {
     );
     this.patchState({ vms: updated });
     this.addEvent('Shorten TTL -2h', vm.name, vm.status);
-    this.toast('TTL уменьшен (-2ч)', 'warn');
+    this.toast('TTL shortened (-2h)', 'warn');
     this.refreshAutoNotices();
   }
 
@@ -427,8 +427,8 @@ export class VmStoreService {
     };
     this.patchState({ vms: [...this.stateSnapshot.vms, vm] });
     this.addEvent('Request VM submitted', vm.name, 'Starting');
-    this.addNotification({ kind: 'info', text: `Заявка принята: ${vm.name} (Starting)`, vmId: vm.id });
-    this.toast('Заявка отправлена (mock)', 'ok');
+    this.addNotification({ kind: 'info', text: `Request accepted: ${vm.name} (Starting)`, vmId: vm.id });
+    this.toast('Request submitted (mock)', 'ok');
     this.refreshAutoNotices();
 
     setTimeout(() => {
@@ -438,8 +438,8 @@ export class VmStoreService {
         const tags = Array.from(new Set([...(item.tags || []), 'provisioned']));
         const next = { ...item, status: 'Running' as VmStatus, ip, tags };
         this.addEvent('VM provisioned', next.name, next.status);
-        this.addNotification({ kind: 'info', text: `Готово: ${next.name} (Running)`, vmId: next.id });
-        this.toast(`${next.name} готова`, 'ok');
+        this.addNotification({ kind: 'info', text: `Ready: ${next.name} (Running)`, vmId: next.id });
+        this.toast(`${next.name} is ready`, 'ok');
         return next;
       });
       this.patchState({ vms: updated });
@@ -453,7 +453,7 @@ export class VmStoreService {
       if (vm.status === 'Running' && Math.random() < 0.35) {
         this.updateVmStatus(vm.id, 'Stopped');
         this.addEvent('Auto: VM stopped (mock)', vm.name, 'Stopped');
-        this.addNotification({ kind: 'warn', text: `VM остановилась (mock): ${vm.name}`, vmId: vm.id });
+        this.addNotification({ kind: 'warn', text: `VM stopped (mock): ${vm.name}`, vmId: vm.id });
       } else if (vm.status === 'Stopped' && Math.random() < 0.35) {
         const ip = vm.ip || `10.10.${Math.floor(Math.random() * 10)}.${Math.floor(10 + Math.random() * 200)}`;
         const updated = this.stateSnapshot.vms.map((item) =>
@@ -525,7 +525,7 @@ export class VmStoreService {
 
   private refreshAutoNotices() {
     const preserved = this.stateSnapshot.notifications.filter(
-      (notice) => notice.kind === 'info' && notice.text.startsWith('Добро пожаловать')
+      (notice) => notice.kind === 'info' && notice.text.startsWith('Welcome')
     );
     const expiring = this.stateSnapshot.vms
       .filter((vm) => computeTtl(vm).expiring && vm.status !== 'Deleting')
@@ -536,7 +536,7 @@ export class VmStoreService {
         return {
           id: randomId(),
           kind: left <= 6 ? 'danger' : 'warn',
-          text: `${vm.name} истекает через ~ ${Math.max(1, Math.round(left))}ч`,
+          text: `${vm.name} expires in ~ ${Math.max(1, Math.round(left))}h`,
           vmId: vm.id,
           read: false,
           at: new Date()

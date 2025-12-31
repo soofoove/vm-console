@@ -31,18 +31,18 @@
               <div class="fw-bold mb-2">TTL</div>
               <div class="d-flex justify-content-between">
                 <div>
-                  <div class="text-muted-2 small">Удаление</div>
+                  <div class="text-muted-2 small">Deletion</div>
                   <div class="fw-bold">{{ formatDate(vm.deleteAt) }}</div>
                 </div>
                 <div class="text-end">
-                  <div class="text-muted-2 small">Осталось</div>
+                  <div class="text-muted-2 small">Remaining</div>
                   <div class="fw-bold">{{ ttlLeft(vm) }}</div>
                 </div>
               </div>
 
               <div class="d-flex gap-2 mt-3">
-                <button class="btn btn-ios" type="button" (click)="extend(vm)">+24ч</button>
-                <button class="btn btn-ios" type="button" (click)="shorten(vm)">-2ч</button>
+                <button class="btn btn-ios" type="button" (click)="extend(vm)">+24h</button>
+                <button class="btn btn-ios" type="button" (click)="shorten(vm)">-2h</button>
                 <button class="btn btn-ios" type="button" (click)="refresh(vm)">Refresh</button>
               </div>
             </div>
@@ -65,13 +65,13 @@
                   Delete
                 </button>
               </div>
-              <div class="text-muted-2 small mt-2">Mock-операции: состояние меняется, события пишутся.</div>
+              <div class="text-muted-2 small mt-2">Mock actions: state changes, events are logged.</div>
             </div>
           </div>
         </div>
       </div>
       <div class="modal-footer border-0">
-        <button class="btn btn-ios" type="button" data-bs-dismiss="modal">Закрыть</button>
+        <button class="btn btn-ios" type="button" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
   </div>

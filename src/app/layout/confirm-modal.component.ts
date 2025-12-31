@@ -12,7 +12,7 @@ import { BootstrapService } from '../core/services/bootstrap.service';
 export class ConfirmModalComponent implements OnInit, OnDestroy {
   @ViewChild('modal', { static: true }) modal?: ElementRef<HTMLDivElement>;
 
-  title = 'Подтвердите';
+  title = 'Confirm';
   body = '…';
   private request?: ConfirmRequest;
   private readonly subscriptions = new Subscription();

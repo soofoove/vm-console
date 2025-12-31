@@ -1,5 +1,5 @@
 <div class="p-3 card-ios" *ngIf="settings$ | async as settings">
-  <div class="fw-bold mb-2">Поведение</div>
+  <div class="fw-bold mb-2">Behavior</div>
 
   <div class="form-check form-switch mb-2">
     <input
@@ -9,7 +9,7 @@
       (change)="updateAutoRefresh($any($event.target).checked)"
       id="optAutoRefresh"
     />
-    <label class="form-check-label" for="optAutoRefresh">Авто-обновление (каждые 5с, mock)</label>
+    <label class="form-check-label" for="optAutoRefresh">Auto-refresh (every 5s, mock)</label>
   </div>
 
   <div class="form-check form-switch mb-2">
@@ -20,8 +20,8 @@
       (change)="updateToasts($any($event.target).checked)"
       id="optToasts"
     />
-    <label class="form-check-label" for="optToasts">Показывать toast-уведомления</label>
+    <label class="form-check-label" for="optToasts">Show toast notifications</label>
   </div>
 
-  <div class="text-muted-2 small">Влияет только на демо.</div>
+  <div class="text-muted-2 small">Affects the demo only.</div>
 </div>

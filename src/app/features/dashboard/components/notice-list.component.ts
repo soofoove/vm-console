@@ -29,6 +29,6 @@ export class NoticeListComponent {
 
   markNoticeRead(id: string) {
     this.store.markNotificationRead(id);
-    this.store.showToast('Отмечено как прочитанное', 'ok');
+    this.store.showToast('Marked as read', 'ok');
   }
 }

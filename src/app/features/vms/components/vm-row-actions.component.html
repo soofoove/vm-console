@@ -8,15 +8,15 @@
     #dropdownToggle
   ></button>
   <ul class="dropdown-menu dropdown-menu-end">
-    <li><button class="dropdown-item" type="button" (click)="runAction('extend')">Продлить TTL (+24ч)</button></li>
-    <li><button class="dropdown-item" type="button" (click)="runAction('restart')">Перезапустить</button></li>
+    <li><button class="dropdown-item" type="button" (click)="runAction('extend')">Extend TTL (+24h)</button></li>
+    <li><button class="dropdown-item" type="button" (click)="runAction('restart')">Restart</button></li>
     <li>
       <button
         class="dropdown-item"
         type="button"
         (click)="runAction(vm.status === 'Stopped' ? 'start' : 'stop')"
       >
-        {{ vm.status === 'Stopped' ? 'Запустить' : 'Остановить' }}
+        {{ vm.status === 'Stopped' ? 'Start' : 'Stop' }}
       </button>
     </li>
     <li><hr class="dropdown-divider" /></li>
@@ -28,7 +28,7 @@
         style="color: var(--red);"
         (click)="runAction('delete')"
       >
-        Удалить
+        Delete
       </button>
     </li>
   </ul>

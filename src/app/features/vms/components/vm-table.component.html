@@ -12,13 +12,13 @@
               (change)="toggleSelectAll(page.items)"
             />
           </th>
-          <th>Имя</th>
-          <th>Статус</th>
+          <th>Name</th>
+          <th>Status</th>
           <th>IP / DNS</th>
-          <th>Конфиг</th>
+          <th>Config</th>
           <th>TTL</th>
-          <th>Удаление</th>
-          <th class="text-end">Действия</th>
+          <th>Deletion</th>
+          <th class="text-end">Actions</th>
         </tr>
       </thead>
       <tbody *ngIf="pagedVms$ | async as page">
@@ -50,7 +50,7 @@
             <span class="badge-soft">{{ vm.disk }} GB</span>
           </td>
           <td>
-            <div class="small text-muted-2">осталось</div>
+            <div class="small text-muted-2">remaining</div>
             <div class="fw-semibold">
               <span
                 [style.color]="ttlLabel(vm).kind === 'danger' ? 'var(--red)' : ttlLabel(vm).kind === 'warn' ? 'var(--orange)' : ''"
@@ -61,7 +61,7 @@
             </div>
           </td>
           <td>
-            <div class="small text-muted-2">авто-удаление</div>
+            <div class="small text-muted-2">auto-delete</div>
             <div class="fw-semibold">{{ formatDate(vm.deleteAt) }}</div>
           </td>
           <td class="text-end">
@@ -69,7 +69,7 @@
           </td>
         </tr>
         <tr *ngIf="page.items.length === 0">
-          <td colspan="8" class="text-muted-2">Нет данных.</td>
+          <td colspan="8" class="text-muted-2">No data.</td>
         </tr>
       </tbody>
     </table>
