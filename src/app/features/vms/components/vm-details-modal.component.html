@@ -1,0 +1,78 @@
+<div class="modal fade" tabindex="-1" aria-hidden="true" #modal>
+  <div class="modal-dialog modal-lg modal-dialog-centered" *ngIf="vm$ | async as vm">
+    <div class="modal-content">
+      <div class="modal-header border-0">
+        <div>
+          <h5 class="modal-title mb-0">{{ vm.name }}</h5>
+          <div class="small text-muted-2">
+            {{ vm.project }} · {{ vm.template }} · {{ vm.cpu }}vCPU/{{ vm.ram }}GB/{{ vm.disk }}GB
+          </div>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body pt-0">
+        <div class="row g-3">
+          <div class="col-12 col-lg-6">
+            <div class="card-ios p-3">
+              <div class="fw-bold mb-2">Overview</div>
+              <div class="d-grid gap-1 small">
+                <div><span class="text-muted-2">ID:</span> <span class="mono">{{ vm.id }}</span></div>
+                <div><span class="text-muted-2">Project:</span> <span>{{ vm.project }}</span></div>
+                <div><span class="text-muted-2">Template:</span> <span>{{ vm.template }}</span></div>
+                <div><span class="text-muted-2">IP:</span> <span class="mono">{{ vm.ip || '—' }}</span></div>
+                <div><span class="text-muted-2">DNS:</span> <span class="mono">{{ vm.dns }}</span></div>
+                <div><span class="text-muted-2">Created:</span> <span>{{ formatDate(vm.createdAt) }}</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-lg-6">
+            <div class="card-ios p-3">
+              <div class="fw-bold mb-2">TTL</div>
+              <div class="d-flex justify-content-between">
+                <div>
+                  <div class="text-muted-2 small">Удаление</div>
+                  <div class="fw-bold">{{ formatDate(vm.deleteAt) }}</div>
+                </div>
+                <div class="text-end">
+                  <div class="text-muted-2 small">Осталось</div>
+                  <div class="fw-bold">{{ ttlLeft(vm) }}</div>
+                </div>
+              </div>
+
+              <div class="d-flex gap-2 mt-3">
+                <button class="btn btn-ios" type="button" (click)="extend(vm)">+24ч</button>
+                <button class="btn btn-ios" type="button" (click)="shorten(vm)">-2ч</button>
+                <button class="btn btn-ios" type="button" (click)="refresh(vm)">Refresh</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="card-ios p-3">
+              <div class="fw-bold mb-2">Actions</div>
+              <div class="d-flex flex-wrap gap-2">
+                <button class="btn btn-ios" type="button" (click)="start(vm)">Start</button>
+                <button class="btn btn-ios" type="button" (click)="stop(vm)">Stop</button>
+                <button class="btn btn-ios" type="button" (click)="restart(vm)">Restart</button>
+                <button class="btn btn-ios" type="button" (click)="copySsh(vm)">Copy SSH</button>
+                <button
+                  class="btn btn-ios"
+                  type="button"
+                  style="border-color: rgba(255,59,48,.25); color: var(--red);"
+                  (click)="delete(vm)"
+                >
+                  Delete
+                </button>
+              </div>
+              <div class="text-muted-2 small mt-2">Mock-операции: состояние меняется, события пишутся.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer border-0">
+        <button class="btn btn-ios" type="button" data-bs-dismiss="modal">Закрыть</button>
+      </div>
+    </div>
+  </div>
+</div>

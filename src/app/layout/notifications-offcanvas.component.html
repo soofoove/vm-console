@@ -1,0 +1,58 @@
+<div
+  class="offcanvas offcanvas-end"
+  tabindex="-1"
+  id="offcanvasNotifications"
+  aria-labelledby="offcanvasNotificationsLabel"
+>
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasNotificationsLabel">Уведомления</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="d-flex gap-2 mb-2">
+      <button class="btn btn-ios" type="button" (click)="markAllRead()">Отметить прочитанным</button>
+      <button class="btn btn-ios" type="button" (click)="clearNotifications()">Очистить</button>
+    </div>
+
+    <div class="d-grid gap-2" *ngIf="(notifications$ | async) as notices">
+      <ng-container *ngIf="notices.length; else empty">
+        <div
+          *ngFor="let notice of notices | slice:0:30"
+          class="notice"
+          [class.warn]="notice.kind === 'warn'"
+          [class.danger]="notice.kind === 'danger'"
+          [class.info]="notice.kind === 'info'"
+        >
+          <div class="d-flex justify-content-between align-items-start gap-2">
+            <div>
+              <div class="fw-bold" style="font-size:.95rem;">{{ notice.read ? '✓' : '•' }} {{ notice.text }}</div>
+              <div class="small text-muted-2">
+                <span class="mono">{{ formatDate(notice.at) }}</span>
+                <ng-container *ngIf="notice.vmId">
+                  ·
+                  <a
+                    href="#"
+                    class="text-decoration-none"
+                    (click)="$event.preventDefault(); openVm(notice.vmId)"
+                    >Открыть VM</a
+                  >
+                </ng-container>
+              </div>
+            </div>
+            <button
+              class="btn btn-ios"
+              style="padding:.30rem .65rem;"
+              type="button"
+              (click)="markRead(notice.id)"
+            >
+              Read
+            </button>
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #empty>
+        <div class="text-muted-2 small mt-2">Нет уведомлений.</div>
+      </ng-template>
+    </div>
+  </div>
+</div>

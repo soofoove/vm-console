@@ -1,0 +1,34 @@
+<div class="row g-3">
+  <div class="col-12">
+    <div class="card-ios p-3">
+      <div class="d-flex align-items-center justify-content-between mb-2">
+        <div class="fw-bold">Уведомления</div>
+        <div class="d-flex gap-2">
+          <button class="btn btn-ios" type="button" (click)="goToVms()">Перейти к списку ВМ</button>
+          <button class="btn btn-ios" type="button" (click)="clearNotices()">Очистить</button>
+        </div>
+      </div>
+
+      <div class="d-grid gap-2" *ngIf="notices$ | async as notices">
+        <ng-container *ngIf="notices.length; else empty">
+          <div
+            *ngFor="let notice of notices"
+            class="notice"
+            [class.warn]="notice.kind === 'warn'"
+            [class.danger]="notice.kind === 'danger'"
+            [class.info]="notice.kind === 'info'"
+            (click)="markNoticeRead(notice.id)"
+          >
+            <div class="d-flex justify-content-between gap-2">
+              <div>{{ notice.text }}</div>
+              <div class="text-muted-2 small mono">{{ formatDate(notice.at) }}</div>
+            </div>
+          </div>
+        </ng-container>
+        <ng-template #empty>
+          <div class="text-muted-2 small">Пока тихо 🙂</div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

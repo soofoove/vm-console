@@ -1,0 +1,90 @@
+<div class="modal fade" tabindex="-1" aria-hidden="true" #modal>
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header border-0">
+        <h5 class="modal-title">Запросить новую виртуальную машину</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body pt-0">
+        <div class="row g-3">
+          <div class="col-12 col-md-6">
+            <label class="form-label text-muted-2">Имя ВМ</label>
+            <input class="form-control input-ios" [(ngModel)]="name" placeholder="vm-dev-04" />
+          </div>
+          <div class="col-12 col-md-6">
+            <label class="form-label text-muted-2">Проект</label>
+            <input class="form-control input-ios" [(ngModel)]="project" placeholder="dev / api" />
+          </div>
+
+          <div class="col-12 col-md-6">
+            <label class="form-label text-muted-2">Шаблон</label>
+            <select class="form-select select-ios" [(ngModel)]="template">
+              <option>Ubuntu 24.04 + Docker</option>
+              <option>Windows Server 2022</option>
+              <option>Ubuntu 22.04 Minimal</option>
+            </select>
+          </div>
+          <div class="col-12 col-md-6">
+            <label class="form-label text-muted-2">Срок жизни (TTL)</label>
+            <select class="form-select select-ios" [(ngModel)]="ttlHours">
+              <option [ngValue]="8">8 часов</option>
+              <option [ngValue]="24">24 часа</option>
+              <option [ngValue]="72">3 дня</option>
+              <option [ngValue]="168">7 дней</option>
+            </select>
+            <div class="form-text text-muted-2">По истечении TTL ВМ будет удалена автоматически (mock).</div>
+          </div>
+
+          <div class="col-12">
+            <label class="form-label text-muted-2">Конфигурация</label>
+            <div class="row g-2">
+              <div class="col-4">
+                <select class="form-select select-ios" [(ngModel)]="cpu">
+                  <option [ngValue]="1">1 vCPU</option>
+                  <option [ngValue]="2">2 vCPU</option>
+                  <option [ngValue]="4">4 vCPU</option>
+                  <option [ngValue]="8">8 vCPU</option>
+                </select>
+              </div>
+              <div class="col-4">
+                <select class="form-select select-ios" [(ngModel)]="ram">
+                  <option [ngValue]="2">2 GB RAM</option>
+                  <option [ngValue]="4">4 GB RAM</option>
+                  <option [ngValue]="8">8 GB RAM</option>
+                  <option [ngValue]="16">16 GB RAM</option>
+                </select>
+              </div>
+              <div class="col-4">
+                <select class="form-select select-ios" [(ngModel)]="disk">
+                  <option [ngValue]="40">40 GB Disk</option>
+                  <option [ngValue]="60">60 GB Disk</option>
+                  <option [ngValue]="80">80 GB Disk</option>
+                  <option [ngValue]="120">120 GB Disk</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <label class="form-label text-muted-2">SSH key (публичный ключ, mock)</label>
+            <input class="form-control input-ios" [(ngModel)]="ssh" placeholder="ssh-ed25519 AAAA... user@host" />
+          </div>
+
+          <div class="col-12">
+            <label class="form-label text-muted-2">Комментарий</label>
+            <textarea
+              class="form-control input-ios"
+              rows="3"
+              [(ngModel)]="comment"
+              placeholder="Для чего нужна ВМ, владелец, ссылка на тикет…"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer border-0">
+        <button class="btn btn-ios" type="button" data-bs-dismiss="modal">Отмена</button>
+        <button class="btn btn-ios-primary" type="button" (click)="submit()">Отправить запрос</button>
+      </div>
+    </div>
+  </div>
+</div>

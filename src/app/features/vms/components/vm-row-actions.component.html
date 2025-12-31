@@ -1,0 +1,35 @@
+<div class="btn-group">
+  <button class="btn btn-ios" type="button" style="padding:.35rem .75rem;" (click)="openDetails()">Open</button>
+  <button
+    class="btn btn-ios dropdown-toggle dropdown-toggle-split"
+    type="button"
+    data-bs-toggle="dropdown"
+    style="padding:.35rem .6rem;"
+    #dropdownToggle
+  ></button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item" type="button" (click)="runAction('extend')">Продлить TTL (+24ч)</button></li>
+    <li><button class="dropdown-item" type="button" (click)="runAction('restart')">Перезапустить</button></li>
+    <li>
+      <button
+        class="dropdown-item"
+        type="button"
+        (click)="runAction(vm.status === 'Stopped' ? 'start' : 'stop')"
+      >
+        {{ vm.status === 'Stopped' ? 'Запустить' : 'Остановить' }}
+      </button>
+    </li>
+    <li><hr class="dropdown-divider" /></li>
+    <li><button class="dropdown-item" type="button" (click)="runAction('copyssh')">Copy SSH</button></li>
+    <li>
+      <button
+        class="dropdown-item"
+        type="button"
+        style="color: var(--red);"
+        (click)="runAction('delete')"
+      >
+        Удалить
+      </button>
+    </li>
+  </ul>
+</div>

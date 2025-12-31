@@ -1,0 +1,26 @@
+<div class="d-flex flex-wrap gap-2 align-items-center" *ngIf="filters$ | async as filters">
+  <select
+    class="form-select select-ios form-select-sm"
+    style="width: 170px;"
+    [ngModel]="filters.statusFilter"
+    (ngModelChange)="updateStatus($event)"
+  >
+    <option value="all">Все статусы</option>
+    <option value="Running">Running</option>
+    <option value="Starting">Starting</option>
+    <option value="Stopped">Stopped</option>
+    <option value="Deleting">Deleting</option>
+  </select>
+
+  <select
+    class="form-select select-ios form-select-sm"
+    style="width: 170px;"
+    [ngModel]="filters.projectFilter"
+    (ngModelChange)="updateProject($event)"
+  >
+    <option value="all">Все проекты</option>
+    <option *ngFor="let project of projects$ | async" [value]="project">{{ project }}</option>
+  </select>
+
+  <button class="btn btn-ios" type="button" (click)="exportVms()">Экспорт (mock)</button>
+</div>

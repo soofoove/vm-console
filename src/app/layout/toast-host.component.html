@@ -1,0 +1,15 @@
+<div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1080;">
+  <div class="d-grid gap-2">
+    <div
+      *ngFor="let toast of messages$ | async"
+      class="toast show"
+      role="alert"
+      [ngStyle]="toastStyle(toast.kind)"
+    >
+      <div class="toast-body d-flex align-items-start justify-content-between gap-2">
+        <div>{{ toast.message }}</div>
+        <button type="button" class="btn-close" aria-label="Close" (click)="dismiss(toast.id)"></button>
+      </div>
+    </div>
+  </div>
+</div>

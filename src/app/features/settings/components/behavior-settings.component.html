@@ -1,0 +1,27 @@
+<div class="p-3 card-ios" *ngIf="settings$ | async as settings">
+  <div class="fw-bold mb-2">Поведение</div>
+
+  <div class="form-check form-switch mb-2">
+    <input
+      class="form-check-input"
+      type="checkbox"
+      [checked]="settings.autoRefresh"
+      (change)="updateAutoRefresh($any($event.target).checked)"
+      id="optAutoRefresh"
+    />
+    <label class="form-check-label" for="optAutoRefresh">Авто-обновление (каждые 5с, mock)</label>
+  </div>
+
+  <div class="form-check form-switch mb-2">
+    <input
+      class="form-check-input"
+      type="checkbox"
+      [checked]="settings.toasts"
+      (change)="updateToasts($any($event.target).checked)"
+      id="optToasts"
+    />
+    <label class="form-check-label" for="optToasts">Показывать toast-уведомления</label>
+  </div>
+
+  <div class="text-muted-2 small">Влияет только на демо.</div>
+</div>

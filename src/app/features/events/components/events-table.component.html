@@ -1,0 +1,32 @@
+<div class="table-ios">
+  <div class="table-responsive">
+    <table class="table align-middle">
+      <thead>
+        <tr>
+          <th style="width: 160px;">Время</th>
+          <th>Событие</th>
+          <th style="width: 220px;">VM</th>
+          <th style="width: 140px;">Статус</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="events$ | async as events">
+        <tr *ngIf="events.length === 0">
+          <td colspan="4" class="text-muted-2">Пока нет событий.</td>
+        </tr>
+        <tr *ngFor="let event of events | slice:0:60">
+          <td class="mono">{{ formatDate(event.at) }}</td>
+          <td>{{ event.type }}</td>
+          <td class="mono">{{ event.vmName || '—' }}</td>
+          <td>
+            <ng-container *ngIf="event.status; else empty">
+              <span class="status" [ngClass]="statusMeta(event.status).className">
+                <span class="dot"></span>{{ statusMeta(event.status).label }}
+              </span>
+            </ng-container>
+            <ng-template #empty>—</ng-template>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

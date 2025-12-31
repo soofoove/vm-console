@@ -1,0 +1,17 @@
+<div class="p-3 card-ios" *ngIf="settings$ | async as settings">
+  <div class="fw-bold mb-2">Квоты (mock)</div>
+
+  <label class="form-label text-muted-2">CPU quota</label>
+  <input
+    type="range"
+    class="form-range"
+    min="4"
+    max="64"
+    [value]="settings.cpuQuota"
+    (input)="updateQuota($any($event.target).value)"
+  />
+
+  <div class="d-flex justify-content-between small text-muted-2">
+    <span>4</span><span class="mono">{{ settings.cpuQuota }}</span><span>64</span>
+  </div>
+</div>
